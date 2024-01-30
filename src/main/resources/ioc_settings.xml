@@ -6,21 +6,22 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-          p:url="jdbc:postgresql://localhost:5432/springdata"
-          p:username="postgres"
-          p:password="jamshid2000"
-          p:driverClassName="org.postgresql.Driver"
-          p:schema="spring_jdbc"
-    />
+<!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"-->
+<!--          p:url="jdbc:postgresql://localhost:5433/springdata"-->
+<!--          p:username="postgres"-->
+<!--          p:password="123"-->
+<!--          p:driverClassName="org.postgresql.Driver"-->
+<!--          p:schema="spring_jdbc"-->
+<!--    />-->
 
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
-          p:dataSource-ref="dataSource"
-    />
+<!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"-->
+<!--          p:dataSource-ref="dataSource"-->
+<!--    />-->
 
-    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"
-          c:dataSource-ref="dataSource"
-    />
+<!--    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"-->
+<!--          c:dataSource-ref="dataSource"-->
+<!--    />-->
+
 
 
 
