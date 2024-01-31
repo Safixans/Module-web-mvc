@@ -29,8 +29,5 @@ public class HomeController {
         return "redirect:/user";
     }
 
-    @GetMapping("/home")
-    public String language(){
-        return "redirect:/navbar";
-    }
+
 }
