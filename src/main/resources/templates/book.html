@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Books Page</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+    th,td{
+        border: 1px solid black;
+        padding: 5px;
+    }
+    </style>
+</head>
+<body>
+<h1>Books Page</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>ACTION</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="books : ${books}" th:object="${books}">
+        <td th:text="*{id}"></td>
+        <td th:text="*{title}"></td>
+        <td th:text="*{author}"></td>
+        <td>
+            <a th:href="@{/book/delete/{id}(id=*{id})}">DELETE</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+</body>
+</html>
