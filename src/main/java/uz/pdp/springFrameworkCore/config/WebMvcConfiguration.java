@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
@@ -47,7 +49,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(this.applicationContext);
-        templateResolver.setPrefix("classpath:/templates/");
+        templateResolver.setPrefix("classpath:/view/");
 //        templateResolver.setPrefix("classpath:/templates/")  ;
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -111,6 +113,14 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public NamedParameterJdbcTemplate namedParameterJdbcTemplate(){
         return new NamedParameterJdbcTemplate(dataSource());
     }
+    @Bean
+    public JdbcTemplate jdbcTemplate(){
+        return new JdbcTemplate(dataSource());
+    }
+    @Bean
+    public SimpleJdbcInsert simpleJdbcInsert(){
+        return new SimpleJdbcInsert(dataSource());
+    }
 
     @Bean
     public MultipartResolver multipartResolver(){
@@ -136,4 +146,5 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         interceptor.setParamName("lang");
         registry.addInterceptor(interceptor);
     }
+
 }

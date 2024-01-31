@@ -10,9 +10,20 @@
     <th:block th:replace="${links}" />
 </head>
 
-
+<h1 th:text="#{welcome}"></h1>
+<h1 th:text="#{welcome2}"></h1>
+<h1 th:text="${#messages.msg('welcome3','Safixon')}"></h1>
 
 <div th:fragment="header">
+    <label for="languageSelect">Choose a Language:</label>
+    <select id="languageSelect" name="language">
+        <option value="ru">Russian</option>
+        <option value="uz">Uzbek</option>
+        <option value="en">English</option>
+    </select>
+    <div th:if="${#authentication.isAuthenticated()}">
+        <img th:if="${#authentication.principal.photo}" th:src="${#authentication.principal.photo}" alt="User Photo" style="max-width: 100px; max-height: 100px;">
+    </div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a sec:authorize="isAnonymous()" class="navbar-brand" href="/">Todo CRUD application</a>

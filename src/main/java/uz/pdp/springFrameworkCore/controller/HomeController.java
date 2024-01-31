@@ -1,27 +1,36 @@
 package uz.pdp.springFrameworkCore.controller;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Locale;
-import java.util.Objects;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequiredArgsConstructor
 public class HomeController {
-    private final MessageSource messageSource;
+    @GetMapping("/home")
+    public ModelAndView home() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("home");
+        modelAndView.addObject("username", "Profilers");
+        return modelAndView;
+    }
 
 
-    @GetMapping("/home2")
-    public String homePage(@CookieValue String language,
-                           @RequestParam(required = false) String lang){
-        lang= Objects.requireNonNullElse(lang,language);
-        String message=messageSource.getMessage("welcome3", new Object[]{"Safixon"}, Locale.forLanguageTag(lang));
-        System.out.println("messageSource = " + message);
-        return "home2";
+    @GetMapping("/admin")
+    @ResponseBody
+    public String admin(){
+        return "redirect:/admin";
+    }
+
+
+    @GetMapping("/user")
+    @ResponseBody
+    public String user(){
+        return "redirect:/user";
+    }
+
+    @GetMapping("/home")
+    public String language(){
+        return "redirect:/navbar";
     }
 }
