@@ -25,6 +25,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import uz.pdp.springFrameworkCore.interceptor.LogInInterceptor;
 
 import javax.sql.DataSource;
 import java.util.Locale;
@@ -121,6 +122,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public MessageSource messageSource(){
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:/i18n/messages");
+        messageSource.setUseCodeAsDefaultMessage(true);
         return messageSource;
     }
     @Bean
@@ -135,5 +137,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("lang");
         registry.addInterceptor(interceptor);
+        registry.addInterceptor(new LogInInterceptor());
     }
 }

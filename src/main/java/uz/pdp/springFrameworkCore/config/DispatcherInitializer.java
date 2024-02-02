@@ -1,8 +1,12 @@
 package uz.pdp.springFrameworkCore.config;
 
+import jakarta.servlet.Filter;
 import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletRegistration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import uz.pdp.springFrameworkCore.filters.RequestResponseTimeFIlter;
+//import uz.pdp.springFrameworkCore.filters.SecurityFilter;
+import uz.pdp.springFrameworkCore.interceptor.LogInInterceptor;
 
 public class DispatcherInitializer  extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -29,4 +33,11 @@ public class DispatcherInitializer  extends AbstractAnnotationConfigDispatcherSe
         );
         registration.setMultipartConfig(multipartConfigElement);
     }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{/*new SecurityFilter(),*/new RequestResponseTimeFIlter()};
+    }
+
+
 }
