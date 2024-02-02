@@ -52,6 +52,7 @@ public class SecurityConfigurer extends WebSecurityConfiguration {
                         .loginPage("/login")
                         .usernameParameter("uname")
                         .passwordParameter("pswd")
+                        .passwordParameter("cnfrmpswd")
                         .defaultSuccessUrl("/todo/list")
         );
         httpSecurity.logout(httpSecurityLogoutConfigurer ->
