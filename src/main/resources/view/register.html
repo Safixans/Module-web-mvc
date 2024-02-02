@@ -6,16 +6,38 @@
     <meta charset="UTF-8">
     <title>Log in</title>
     <link rel="stylesheet" href="/style/home.css">
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        th,td{
+            border: 1px solid black;
+            padding: 5px;
+        }
+        .error{
+            color: red;
+            font-size: 10px;
+        }
+    </style>
 </head>
 <body style="background: antiquewhite">
 <div class="container my-5">
     <h1 class="my-3" style="text-align: center">Register Page</h1>
-    <form method="post" action="/auth/register">
+    <form method="post" action="/auth/register" th:object="${dto}">
+        <ul th:if="${#fields.hasAnyErrors()}">
+            <li th:each=" err: ${#fields.errors()}" th:text="${err}" class="red"></li><!--error handling -->
+        </ul>
         <label class="mx-5" for="uname"> User Name</label>
         <input class="form-control w-75 mx-5" type="text" name="username" id="uname">
+        <div th:if="${#fields.hasErrors('password')}"  >
+            <span th:each="er : ${#fields.errors('password')}" th:text="#{${er}}" class="error"></span>
+        </div>
         <label class="mx-5" for="pswd"> User password</label>
         <input class="form-control w-75 mx-5" type="password" name="password" id="pswd">
-        <label class="mx-5" for="pswd"> User  confirmation password</label>
+        <div th:if="${#fields.hasErrors('confirmationPassword')}" >
+            <span th:each="er : ${#fields.errors('confirmationPassword')}" th:text="#{${er}}" class="error"></span>
+        </div>
+        <label class="mx-5" for="cnfrmpswd"> User  confirmation password</label>
         <input class="form-control w-75 mx-5" type="password" name="confirmation Password" id="cnfrmpswd">
 
         <label class="mx-5" for="photo">Upload Photo</label>
@@ -23,7 +45,7 @@
 
 
         <button class="btn btn-success mx-5 my-3" type="submit">Register</button>
-        <a href="/" class="btn btn-primary">Back to home</a>
+        <a href="/home" class="btn btn-primary">Back to home</a>
     </form>
 </div>
 </body>
